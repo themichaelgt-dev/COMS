@@ -224,14 +224,15 @@ export default function ContactsPage() {
         {/* Main table area */}
         <div className="flex-1 min-w-0">
           {/* Toolbar */}
-          <div className="flex flex-col sm:flex-row gap-2 mb-3">
-            <div className="flex-1 flex border-2 border-black bg-white">
+          <div className="flex flex-col gap-2 mb-3">
+            {/* Row 1: search */}
+            <div className="flex border-2 border-black bg-white">
               <Search className="w-4 h-4 mx-3 self-center text-gray-400 flex-shrink-0" />
               <input
                 placeholder="Search contacts..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="flex-1 py-2 text-sm font-mono bg-transparent focus:outline-none"
+                className="flex-1 min-w-0 py-2 text-sm font-mono bg-transparent focus:outline-none"
               />
               {search && (
                 <button onClick={() => setSearch('')} className="px-3 hover:bg-gray-100">
@@ -240,40 +241,43 @@ export default function ContactsPage() {
               )}
             </div>
 
-            {/* Tag filter dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setShowTagFilterMenu(!showTagFilterMenu)}
-                className="flex items-center gap-2 border-2 border-black px-3 py-2 text-xs font-bold uppercase tracking-widest bg-white hover:bg-black hover:text-white transition-colors w-full sm:w-auto"
-              >
-                <Filter className="w-3 h-3" />
-                {tagFilter === 'all' ? 'All Tags' : tagFilter}
-                <ChevronDown className="w-3 h-3 ml-auto" />
-              </button>
-              {showTagFilterMenu && (
-                <div className="absolute top-full left-0 right-0 z-10 bg-white border-2 border-black border-t-0">
-                  {['all', ...ALL_TAGS].map(tag => (
-                    <button key={tag} onClick={() => { setTagFilter(tag); setShowTagFilterMenu(false) }}
-                      className={cn('block w-full text-left px-3 py-2 text-xs font-bold uppercase tracking-wider border-b border-gray-200 last:border-0 hover:bg-black hover:text-white transition-colors',
-                        tagFilter === tag ? 'bg-black text-white' : '')}>
-                      {tag === 'all' ? 'All Tags' : tag}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            {/* Row 2: tag filter + import/export */}
+            <div className="flex gap-2">
+              {/* Tag filter dropdown */}
+              <div className="relative flex-1">
+                <button
+                  onClick={() => setShowTagFilterMenu(!showTagFilterMenu)}
+                  className="flex items-center gap-2 border-2 border-black px-3 py-2 text-xs font-bold uppercase tracking-widest bg-white hover:bg-black hover:text-white transition-colors w-full"
+                >
+                  <Filter className="w-3 h-3 flex-shrink-0" />
+                  <span className="truncate">{tagFilter === 'all' ? 'All Tags' : tagFilter}</span>
+                  <ChevronDown className="w-3 h-3 ml-auto flex-shrink-0" />
+                </button>
+                {showTagFilterMenu && (
+                  <div className="absolute top-full left-0 right-0 z-10 bg-white border-2 border-black border-t-0">
+                    {['all', ...ALL_TAGS].map(tag => (
+                      <button key={tag} onClick={() => { setTagFilter(tag); setShowTagFilterMenu(false) }}
+                        className={cn('block w-full text-left px-3 py-2 text-xs font-bold uppercase tracking-wider border-b border-gray-200 last:border-0 hover:bg-black hover:text-white transition-colors',
+                          tagFilter === tag ? 'bg-black text-white' : '')}>
+                        {tag === 'all' ? 'All Tags' : tag}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
 
-            <div className="flex gap-0 border-2 border-black">
-              <button onClick={() => fileInputRef.current?.click()}
-                className="flex items-center gap-1 px-3 py-2 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors border-r-2 border-black">
-                <Upload className="w-3 h-3" />
-                <span className="hidden sm:inline">Import</span>
-              </button>
-              <button onClick={handleExportCSV}
-                className="flex items-center gap-1 px-3 py-2 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors">
-                <Download className="w-3 h-3" />
-                <span className="hidden sm:inline">Export</span>
-              </button>
+              <div className="flex gap-0 border-2 border-black flex-shrink-0">
+                <button onClick={() => fileInputRef.current?.click()}
+                  className="flex items-center gap-1 px-3 py-2 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors border-r-2 border-black">
+                  <Upload className="w-3 h-3" />
+                  <span>Import</span>
+                </button>
+                <button onClick={handleExportCSV}
+                  className="flex items-center gap-1 px-3 py-2 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors">
+                  <Download className="w-3 h-3" />
+                  <span>Export</span>
+                </button>
+              </div>
             </div>
             <input ref={fileInputRef} type="file" accept=".csv,.txt" className="hidden" onChange={handleImportCSV} />
           </div>

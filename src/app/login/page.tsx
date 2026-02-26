@@ -24,7 +24,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-[oklch(0.975_0.002_60)] flex flex-col items-center justify-center p-4">
       {/* Logo */}
-      <div className="w-full max-w-sm mb-0 border-2 border-black">
+      <div className="w-full max-w-sm mb-0 border-2 border-black overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logo.png" alt="COMS" className="w-full h-auto block" />
       </div>

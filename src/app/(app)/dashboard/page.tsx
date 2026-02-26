@@ -108,14 +108,14 @@ export default function DashboardPage() {
           ) : (
             <div>
               {recentActivity.map((item, i) => (
-                <div key={i} className="flex items-start gap-3 px-4 py-3 border-b border-gray-200 last:border-0">
+                <div key={i} className="flex items-start gap-3 px-4 py-3 border-b border-gray-200 last:border-0 overflow-hidden">
                   {item.kind === 'send' ? (
                     <>
                       <div className={`mt-0.5 flex-shrink-0 ${item.log.status === 'sent' ? 'text-green-600' : 'text-[oklch(0.55_0.24_27)]'}`}>
                         {item.log.status === 'sent' ? <CheckCircle className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-black">
+                      <div className="flex-1 min-w-0 overflow-hidden">
+                        <p className="text-xs font-bold text-black truncate">
                           {item.contact?.name ?? 'Unknown'}
                           <span className="font-normal text-gray-500 ml-1">
                             {item.log.status === 'sent' ? 'received via' : 'failed via'} {item.log.channel.toUpperCase()}
@@ -123,21 +123,21 @@ export default function DashboardPage() {
                         </p>
                         <p className="text-xs text-gray-400 mt-0.5 truncate">{item.broadcast?.message.slice(0, 55)}...</p>
                       </div>
-                      <span className="text-xs text-gray-400 flex-shrink-0">{formatRelativeTime(item.time)}</span>
+                      <span className="text-xs text-gray-400 flex-shrink-0 hidden sm:block">{formatRelativeTime(item.time)}</span>
                     </>
                   ) : (
                     <>
                       <div className="mt-0.5 flex-shrink-0 text-blue-600">
                         <MessageCircle className="w-4 h-4" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-black">
+                      <div className="flex-1 min-w-0 overflow-hidden">
+                        <p className="text-xs font-bold text-black truncate">
                           {item.contact?.name ?? 'Unknown'}
                           <span className="font-normal text-gray-500 ml-1">replied</span>
                         </p>
                         <p className="text-xs text-gray-400 mt-0.5 truncate">{item.msg.content}</p>
                       </div>
-                      <span className="text-xs text-gray-400 flex-shrink-0">{formatRelativeTime(item.time)}</span>
+                      <span className="text-xs text-gray-400 flex-shrink-0 hidden sm:block">{formatRelativeTime(item.time)}</span>
                     </>
                   )}
                 </div>

@@ -16,7 +16,7 @@ export function PageWrapper({ title, description, actions, children, className, 
         {/* Page header */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-6 pb-4 border-b-2 border-black">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-black" style={{ fontFamily: 'Georgia, serif' }}>
+            <h1 className="text-xl md:text-3xl font-bold uppercase tracking-tight text-black break-words" style={{ fontFamily: 'Georgia, serif' }}>
               {title}
             </h1>
             {description && (
