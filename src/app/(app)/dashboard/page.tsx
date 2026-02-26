@@ -74,16 +74,20 @@ export default function DashboardPage() {
     >
       {/* Stats grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-0 mb-6 border-2 border-black">
-        <div className="border-r-2 border-black last:border-r-0 md:[&:nth-child(2)]:border-r-2 md:[&:nth-child(3)]:border-r-2">
+        {/* Row 1 col 1 — right border always, bottom border on mobile */}
+        <div className="border-r-2 border-b-2 md:border-b-0 border-black">
           <StatBlock label="Total Contacts" value={stats.totalContacts} />
         </div>
-        <div className="border-r-0 md:border-r-2 border-black">
+        {/* Row 1 col 2 — no right border on mobile, right border on md, bottom border on mobile */}
+        <div className="border-b-2 md:border-b-0 md:border-r-2 border-black">
           <StatBlock label="Sent Today" value={stats.sentToday} />
         </div>
-        <div className="border-t-2 md:border-t-0 border-r-2 border-black">
+        {/* Row 2 col 1 — right border always */}
+        <div className="border-r-2 border-black">
           <StatBlock label="Unread Replies" value={stats.unread} accent={stats.unread > 0} />
         </div>
-        <div className="border-t-2 md:border-t-0 border-black">
+        {/* Row 2 col 2 — no extra borders */}
+        <div>
           <StatBlock label="Active Sends" value={stats.activeBroadcasts} />
         </div>
       </div>

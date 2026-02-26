@@ -14,7 +14,7 @@ export function PageWrapper({ title, description, actions, children, className, 
     <div className={cn('flex-1 min-h-screen', className)}>
       <div className={cn('mx-auto px-4 md:px-6 py-6', fullWidth ? 'max-w-none' : 'max-w-5xl')}>
         {/* Page header */}
-        <div className="flex items-start justify-between mb-6 pb-4 border-b-2 border-black">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-6 pb-4 border-b-2 border-black">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-black" style={{ fontFamily: 'Georgia, serif' }}>
               {title}
@@ -24,7 +24,7 @@ export function PageWrapper({ title, description, actions, children, className, 
             )}
           </div>
           {actions && (
-            <div className="flex items-center gap-2 flex-shrink-0 ml-4">
+            <div className="flex items-center gap-2 sm:flex-shrink-0">
               {actions}
             </div>
           )}

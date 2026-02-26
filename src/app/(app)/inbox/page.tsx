@@ -24,14 +24,14 @@ function ConversationItem({ contact, lastMessage, unreadCount, isActive, onClick
         {initials}
       </div>
       <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between">
-          <p className={cn('text-xs font-bold uppercase tracking-wider truncate', unreadCount > 0 && !isActive ? 'text-black' : '')}>
+        <div className="flex items-center justify-between gap-1 min-w-0">
+          <p className={cn('text-xs font-bold uppercase tracking-wider truncate flex-1 min-w-0', unreadCount > 0 && !isActive ? 'text-black' : '')}>
             {contact.name}
           </p>
-          <div className="flex items-center gap-1.5 flex-shrink-0 ml-2">
-            {lastMessage && <span className={cn('text-xs font-mono', isActive ? 'text-red-200' : 'text-gray-400')}>{formatRelativeTime(lastMessage.timestamp)}</span>}
+          <div className="flex items-center gap-1 flex-shrink-0">
+            {lastMessage && <span className={cn('text-xs font-mono hidden xs:block', isActive ? 'text-red-200' : 'text-gray-400')}>{formatRelativeTime(lastMessage.timestamp)}</span>}
             {unreadCount > 0 && (
-              <span className={cn('text-xs font-bold px-1.5 py-0.5 border-2', isActive ? 'bg-white text-[oklch(0.55_0.24_27)] border-white' : 'bg-[oklch(0.55_0.24_27)] text-white border-[oklch(0.55_0.24_27)]')}>
+              <span className={cn('text-xs font-bold px-1 py-0.5 border-2 min-w-[18px] text-center', isActive ? 'bg-white text-[oklch(0.55_0.24_27)] border-white' : 'bg-[oklch(0.55_0.24_27)] text-white border-[oklch(0.55_0.24_27)]')}>
                 {unreadCount}
               </span>
             )}
@@ -188,22 +188,22 @@ export default function InboxPage() {
               </ScrollArea>
 
               {/* Reply input */}
-              <div className="border-t-2 border-black bg-white px-5 py-3">
+              <div className="border-t-2 border-black bg-white px-3 sm:px-5 py-3 flex-shrink-0">
                 <div className="max-w-2xl mx-auto flex gap-2 items-end">
                   <textarea
                     placeholder={`Reply to ${activeContact.name}...`}
                     value={replyText}
                     onChange={e => setReplyText(e.target.value)}
                     onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSendReply() } }}
-                    className="flex-1 border-2 border-black px-3 py-2 text-sm font-mono bg-white focus:outline-none resize-none min-h-10 max-h-32"
+                    className="flex-1 border-2 border-black px-3 py-2 text-sm font-mono bg-white focus:outline-none resize-none min-h-10 max-h-20"
                     rows={1}
                   />
                   <button onClick={handleSendReply} disabled={!replyText.trim()}
-                    className="bg-[oklch(0.55_0.24_27)] text-white border-2 border-[oklch(0.55_0.24_27)] p-2 hover:bg-black hover:border-black transition-colors disabled:opacity-40">
+                    className="bg-[oklch(0.55_0.24_27)] text-white border-2 border-[oklch(0.55_0.24_27)] p-2 hover:bg-black hover:border-black transition-colors disabled:opacity-40 flex-shrink-0">
                     <Send className="w-4 h-4" />
                   </button>
                 </div>
-                <p className="text-xs font-mono text-gray-400 mt-1 max-w-2xl mx-auto">
+                <p className="text-xs font-mono text-gray-400 mt-1 max-w-2xl mx-auto hidden sm:block">
                   Enter to send · Shift+Enter new line · via {activeContact.hasSignal ? 'Signal' : 'SMS'}
                 </p>
               </div>
