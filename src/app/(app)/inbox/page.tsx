@@ -23,7 +23,7 @@ function ConversationItem({ contact, lastMessage, unreadCount, isActive, onClick
         isActive ? 'bg-white text-[oklch(0.55_0.24_27)] border-white' : 'bg-black text-white border-black')}>
         {initials}
       </div>
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 overflow-hidden">
         <div className="flex items-center justify-between gap-1 min-w-0">
           <p className={cn('text-xs font-bold uppercase tracking-wider truncate flex-1 min-w-0', unreadCount > 0 && !isActive ? 'text-black' : '')}>
             {contact.name}

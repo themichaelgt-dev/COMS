@@ -108,7 +108,7 @@ export default function DashboardPage() {
           ) : (
             <div>
               {recentActivity.map((item, i) => (
-                <div key={i} className="flex items-start gap-3 px-4 py-3 border-b border-gray-200 last:border-0 overflow-hidden">
+                <div key={i} className="flex items-start gap-3 px-4 py-3 border-b border-gray-200 last:border-0">
                   {item.kind === 'send' ? (
                     <>
                       <div className={`mt-0.5 flex-shrink-0 ${item.log.status === 'sent' ? 'text-green-600' : 'text-[oklch(0.55_0.24_27)]'}`}>
@@ -180,12 +180,12 @@ export default function DashboardPage() {
             </div>
             <div>
               {broadcasts.slice(0, 3).map((b, i) => (
-                <div key={b.id} className={`px-4 py-3 ${i < 2 ? 'border-b border-gray-200' : ''}`}>
-                  <p className="text-xs text-black line-clamp-2 mb-1">{b.message.slice(0, 70)}...</p>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-400">{formatDateTime(b.createdAt)}</span>
-                    <span className="text-xs font-bold text-green-700">{b.sentCount}✓</span>
-                    {b.failedCount > 0 && <span className="text-xs font-bold text-red-600">{b.failedCount}✗</span>}
+                <div key={b.id} className={`px-4 py-3 overflow-hidden ${i < 2 ? 'border-b border-gray-200' : ''}`}>
+                  <p className="text-xs text-black line-clamp-2 mb-1 break-words">{b.message.slice(0, 70)}...</p>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-xs text-gray-400 truncate">{formatDateTime(b.createdAt)}</span>
+                    <span className="text-xs font-bold text-green-700 flex-shrink-0">{b.sentCount}✓</span>
+                    {b.failedCount > 0 && <span className="text-xs font-bold text-red-600 flex-shrink-0">{b.failedCount}✗</span>}
                   </div>
                 </div>
               ))}
