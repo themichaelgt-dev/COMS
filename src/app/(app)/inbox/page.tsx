@@ -17,7 +17,7 @@ function ConversationItem({ contact, lastMessage, unreadCount, isActive, onClick
   const initials = contact.name.split(' ').map(n => n[0]).slice(0, 2).join('')
   return (
     <button onClick={onClick}
-      className={cn('w-full text-left px-4 py-3 flex items-start gap-3 border-b-2 border-black transition-colors last:border-b-0',
+      className={cn('w-full text-left px-3 sm:px-4 py-3 flex items-start gap-3 border-b-2 border-black transition-colors last:border-b-0',
         isActive ? 'bg-[oklch(0.55_0.24_27)] text-white' : 'bg-white hover:bg-[oklch(0.975_0.002_60)]')}>
       <div className={cn('w-8 h-8 flex items-center justify-center flex-shrink-0 text-xs font-bold border-2',
         isActive ? 'bg-white text-[oklch(0.55_0.24_27)] border-white' : 'bg-black text-white border-black')}>
@@ -38,7 +38,7 @@ function ConversationItem({ contact, lastMessage, unreadCount, isActive, onClick
           </div>
         </div>
         {lastMessage && (
-          <p className={cn('text-xs font-mono truncate mt-0.5', isActive ? 'text-red-100' : unreadCount > 0 ? 'text-black' : 'text-gray-400')}>
+          <p className={cn('text-xs font-mono line-clamp-2 sm:truncate mt-0.5', isActive ? 'text-red-100' : unreadCount > 0 ? 'text-black' : 'text-gray-400')}>
             {lastMessage.direction === 'outbound' && 'You: '}{lastMessage.content}
           </p>
         )}
@@ -137,9 +137,9 @@ export default function InboxPage() {
         </div>
       )}
 
-      <div className="flex flex-1 overflow-hidden h-[calc(100vh-3.5rem)] md:h-screen">
+      <div className="flex flex-1 overflow-hidden h-[calc(100dvh-3.5rem)] md:h-screen min-h-0">
         {/* Conversation list */}
-        <div className={cn('w-full md:w-64 flex flex-col border-r-2 border-black',
+        <div className={cn('w-full md:w-64 flex flex-col border-r-2 border-black min-h-0',
           showMobileConversation ? 'hidden md:flex' : 'flex')}>
           <div className="px-4 py-3 border-b-2 border-black bg-black text-white">
             <p className="text-xs font-bold uppercase tracking-widest">
@@ -160,7 +160,7 @@ export default function InboxPage() {
         </div>
 
         {/* Conversation thread */}
-        <div className={cn('flex-1 flex flex-col bg-[oklch(0.975_0.002_60)]',
+        <div className={cn('flex-1 flex flex-col bg-[oklch(0.975_0.002_60)] min-h-0',
           !showMobileConversation ? 'hidden md:flex' : 'flex')}>
           {activeContact ? (
             <>

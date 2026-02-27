@@ -108,36 +108,34 @@ export default function DashboardPage() {
           ) : (
             <div>
               {recentActivity.map((item, i) => (
-                <div key={i} className="flex items-start gap-3 px-4 py-3 border-b border-gray-200 last:border-0">
+                <div key={i} className="flex items-start gap-3 px-4 py-3 border-b border-gray-200 last:border-0 min-w-0">
                   {item.kind === 'send' ? (
                     <>
                       <div className={`mt-0.5 flex-shrink-0 ${item.log.status === 'sent' ? 'text-green-600' : 'text-[oklch(0.55_0.24_27)]'}`}>
                         {item.log.status === 'sent' ? <CheckCircle className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
                       </div>
-                      <div className="flex-1 min-w-0 overflow-hidden">
-                        <p className="text-xs font-bold text-black truncate">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-bold text-black sm:truncate">
                           {item.contact?.name ?? 'Unknown'}
                           <span className="font-normal text-gray-500 ml-1">
                             {item.log.status === 'sent' ? 'received via' : 'failed via'} {item.log.channel.toUpperCase()}
                           </span>
                         </p>
-                        <p className="text-xs text-gray-400 mt-0.5 truncate">{item.broadcast?.message.slice(0, 55)}...</p>
+                        <p className="text-xs text-gray-400 mt-0.5 line-clamp-2 sm:truncate">{item.broadcast?.message.slice(0, 55)}...</p>
                       </div>
-                      <span className="text-xs text-gray-400 flex-shrink-0 hidden sm:block">{formatRelativeTime(item.time)}</span>
                     </>
                   ) : (
                     <>
                       <div className="mt-0.5 flex-shrink-0 text-blue-600">
                         <MessageCircle className="w-4 h-4" />
                       </div>
-                      <div className="flex-1 min-w-0 overflow-hidden">
-                        <p className="text-xs font-bold text-black truncate">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-bold text-black sm:truncate">
                           {item.contact?.name ?? 'Unknown'}
                           <span className="font-normal text-gray-500 ml-1">replied</span>
                         </p>
-                        <p className="text-xs text-gray-400 mt-0.5 truncate">{item.msg.content}</p>
+                        <p className="text-xs text-gray-400 mt-0.5 line-clamp-2 sm:truncate">{item.msg.content}</p>
                       </div>
-                      <span className="text-xs text-gray-400 flex-shrink-0 hidden sm:block">{formatRelativeTime(item.time)}</span>
                     </>
                   )}
                 </div>
@@ -154,20 +152,22 @@ export default function DashboardPage() {
               <span className="text-xs font-bold uppercase tracking-widest">Quick Actions</span>
             </div>
             <div className="divide-y-2 divide-black">
-              <Link href="/compose" className="flex items-center justify-between px-4 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[oklch(0.55_0.24_27)] hover:text-white transition-colors">
-                + New Broadcast <ArrowRight className="w-3 h-3" />
+              <Link href="/compose" className="flex items-center justify-between gap-2 px-4 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[oklch(0.55_0.24_27)] hover:text-white transition-colors min-w-0">
+                <span className="truncate">+ New Broadcast</span> <ArrowRight className="w-3 h-3 flex-shrink-0" />
               </Link>
-              <Link href="/contacts" className="flex items-center justify-between px-4 py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors">
-                + Add Contact <ArrowRight className="w-3 h-3" />
+              <Link href="/contacts" className="flex items-center justify-between gap-2 px-4 py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors min-w-0">
+                <span className="truncate">+ Add Contact</span> <ArrowRight className="w-3 h-3 flex-shrink-0" />
               </Link>
-              <Link href="/inbox" className="flex items-center justify-between px-4 py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors">
-                View Inbox
-                {stats.unread > 0 && (
-                  <span className="bg-[oklch(0.55_0.24_27)] text-white text-xs font-bold px-1.5 py-0.5 ml-auto mr-2">
-                    {stats.unread}
-                  </span>
-                )}
-                <ArrowRight className="w-3 h-3" />
+              <Link href="/inbox" className="flex items-center justify-between gap-2 px-4 py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors min-w-0">
+                <span className="truncate">View Inbox</span>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  {stats.unread > 0 && (
+                    <span className="bg-[oklch(0.55_0.24_27)] text-white text-xs font-bold px-1.5 py-0.5">
+                      {stats.unread}
+                    </span>
+                  )}
+                  <ArrowRight className="w-3 h-3" />
+                </div>
               </Link>
             </div>
           </div>
@@ -180,10 +180,10 @@ export default function DashboardPage() {
             </div>
             <div>
               {broadcasts.slice(0, 3).map((b, i) => (
-                <div key={b.id} className={`px-4 py-3 overflow-hidden ${i < 2 ? 'border-b border-gray-200' : ''}`}>
-                  <p className="text-xs text-black line-clamp-2 mb-1 break-words">{b.message.slice(0, 70)}...</p>
+                <div key={b.id} className={`px-4 py-3 min-w-0 ${i < 2 ? 'border-b border-gray-200' : ''}`}>
+                  <p className="text-xs text-black line-clamp-3 sm:line-clamp-2 mb-1">{b.message.slice(0, 70)}...</p>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-xs text-gray-400 truncate">{formatDateTime(b.createdAt)}</span>
+                    <span className="text-xs text-gray-400">{formatDateTime(b.createdAt)}</span>
                     <span className="text-xs font-bold text-green-700 flex-shrink-0">{b.sentCount}✓</span>
                     {b.failedCount > 0 && <span className="text-xs font-bold text-red-600 flex-shrink-0">{b.failedCount}✗</span>}
                   </div>
