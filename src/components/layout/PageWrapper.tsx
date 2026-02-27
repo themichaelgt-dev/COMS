@@ -11,8 +11,8 @@ interface PageWrapperProps {
 
 export function PageWrapper({ title, description, actions, children, className, fullWidth }: PageWrapperProps) {
   return (
-    <div className={cn('flex-1 min-h-screen', className)}>
-      <div className={cn('mx-auto px-4 md:px-6 py-6', fullWidth ? 'max-w-none' : 'max-w-5xl')}>
+    <div className={cn('flex-1 min-h-screen w-full min-w-0', className)}>
+      <div className={cn('mx-auto px-4 md:px-6 py-6 w-full min-w-0', fullWidth ? 'max-w-none' : 'max-w-5xl')}>
         {/* Page header */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-6 pb-4 border-b-2 border-black">
           <div>

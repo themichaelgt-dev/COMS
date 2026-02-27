@@ -232,7 +232,7 @@ export default function ContactsPage() {
                 placeholder="Search contacts..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="flex-1 min-w-0 py-2 text-sm font-mono bg-transparent focus:outline-none"
+                className="flex-1 min-w-0 py-2 font-mono bg-transparent focus:outline-none"
               />
               {search && (
                 <button onClick={() => setSearch('')} className="px-3 hover:bg-gray-100">
@@ -308,18 +308,18 @@ export default function ContactsPage() {
               <table className="w-full text-xs font-mono">
                 <thead>
                   <tr className="border-b-2 border-black bg-black text-white">
-                    <th className="pl-4 py-2.5 w-8 text-left">
+                    <th className="pl-2 sm:pl-4 py-2.5 w-8 text-left">
                       <input type="checkbox"
                         checked={selected.size > 0 && selected.size === filtered.length}
                         onChange={toggleSelectAll}
                         className="accent-[oklch(0.55_0.24_27)]" />
                     </th>
-                    <th className="px-4 py-2.5 text-left font-bold uppercase tracking-wider">Name</th>
-                    <th className="px-4 py-2.5 text-left font-bold uppercase tracking-wider hidden sm:table-cell">Phone</th>
-                    <th className="px-4 py-2.5 text-left font-bold uppercase tracking-wider hidden lg:table-cell">Email</th>
-                    <th className="px-4 py-2.5 text-left font-bold uppercase tracking-wider">Ch.</th>
-                    <th className="px-4 py-2.5 text-left font-bold uppercase tracking-wider hidden md:table-cell">Tags</th>
-                    <th className="px-4 py-2.5 text-left font-bold uppercase tracking-wider hidden lg:table-cell">Added</th>
+                    <th className="px-2 sm:px-4 py-2.5 text-left font-bold uppercase tracking-wider">Name</th>
+                    <th className="px-2 sm:px-4 py-2.5 text-left font-bold uppercase tracking-wider hidden sm:table-cell">Phone</th>
+                    <th className="px-2 sm:px-4 py-2.5 text-left font-bold uppercase tracking-wider hidden lg:table-cell">Email</th>
+                    <th className="px-2 sm:px-4 py-2.5 text-left font-bold uppercase tracking-wider">Ch.</th>
+                    <th className="px-2 sm:px-4 py-2.5 text-left font-bold uppercase tracking-wider hidden md:table-cell">Tags</th>
+                    <th className="px-2 sm:px-4 py-2.5 text-left font-bold uppercase tracking-wider hidden lg:table-cell">Added</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -336,17 +336,17 @@ export default function ContactsPage() {
                         className={cn('border-b border-gray-200 last:border-0 cursor-pointer transition-colors',
                           selected.has(contact.id) ? 'bg-[oklch(0.975_0.002_60)]' : 'hover:bg-[oklch(0.975_0.002_60)]')}
                         onClick={() => { setEditContact(contact); setShowAddPanel(false) }}>
-                        <td className="pl-4 py-2.5" onClick={e => { e.stopPropagation(); toggleSelect(contact.id) }}>
+                        <td className="pl-2 sm:pl-4 py-2.5" onClick={e => { e.stopPropagation(); toggleSelect(contact.id) }}>
                           <input type="checkbox" checked={selected.has(contact.id)} onChange={() => toggleSelect(contact.id)}
                             className="accent-[oklch(0.55_0.24_27)]" />
                         </td>
-                        <td className="px-4 py-2.5">
+                        <td className="px-2 sm:px-4 py-2.5">
                           <p className="font-bold text-black">{contact.name}</p>
                           <p className="text-gray-400 sm:hidden">{contact.phone}</p>
                         </td>
-                        <td className="px-4 py-2.5 text-gray-600 hidden sm:table-cell">{contact.phone}</td>
-                        <td className="px-4 py-2.5 text-gray-500 hidden lg:table-cell">{contact.email ?? '—'}</td>
-                        <td className="px-4 py-2.5">
+                        <td className="px-2 sm:px-4 py-2.5 text-gray-600 hidden sm:table-cell">{contact.phone}</td>
+                        <td className="px-2 sm:px-4 py-2.5 text-gray-500 hidden lg:table-cell">{contact.email ?? '—'}</td>
+                        <td className="px-2 sm:px-4 py-2.5">
                           {contact.hasSignal ? (
                             <span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold uppercase">
                               <Signal className="w-2.5 h-2.5 inline mr-0.5" />SIG
@@ -355,7 +355,7 @@ export default function ContactsPage() {
                             <span className="border border-gray-400 text-gray-500 px-1.5 py-0.5 text-xs font-bold uppercase">SMS</span>
                           )}
                         </td>
-                        <td className="px-4 py-2.5 hidden md:table-cell">
+                        <td className="px-2 sm:px-4 py-2.5 hidden md:table-cell">
                           <div className="flex flex-wrap gap-1">
                             {contact.tags.slice(0, 2).map(tag => (
                               <span key={tag} className="border border-black px-1.5 py-0.5 text-xs uppercase tracking-wider">
@@ -367,7 +367,7 @@ export default function ContactsPage() {
                             )}
                           </div>
                         </td>
-                        <td className="px-4 py-2.5 text-gray-400 hidden lg:table-cell">{formatDate(contact.createdAt)}</td>
+                        <td className="px-2 sm:px-4 py-2.5 text-gray-400 hidden lg:table-cell">{formatDate(contact.createdAt)}</td>
                       </tr>
                     ))
                   )}

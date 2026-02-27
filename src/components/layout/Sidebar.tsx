@@ -129,7 +129,7 @@ export function Sidebar() {
               <Menu className="w-5 h-5" />
             </button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-52 p-0 border-r-2 border-black">
+          <SheetContent side="left" className="w-[85vw] max-w-xs p-0 border-r-2 border-black">
             <SidebarContent onNavigate={() => setOpen(false)} />
           </SheetContent>
         </Sheet>

@@ -106,20 +106,24 @@ export default function HistoryPage() {
   return (
     <PageWrapper title="Broadcast History" description={`${broadcasts.length} total broadcasts`}>
       {/* Date filter */}
-      <div className="flex flex-wrap items-center gap-2 mb-4 border-2 border-black bg-white p-3">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-4 border-2 border-black bg-white p-3">
         <span className="text-xs font-bold uppercase tracking-widest flex-shrink-0">Filter:</span>
-        <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)}
-          className="border-2 border-black px-2 py-1 text-xs font-mono focus:outline-none min-w-0 flex-shrink-0" />
-        <span className="text-xs font-mono text-gray-400 flex-shrink-0">→</span>
-        <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)}
-          className="border-2 border-black px-2 py-1 text-xs font-mono focus:outline-none min-w-0 flex-shrink-0" />
-        {(dateFrom || dateTo) && (
-          <button onClick={() => { setDateFrom(''); setDateTo('') }}
-            className="text-xs font-bold uppercase tracking-wider border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-colors flex-shrink-0">
-            Clear
-          </button>
-        )}
-        <span className="ml-auto text-xs font-mono text-gray-500 flex-shrink-0">{filtered.length} results</span>
+        <div className="flex items-center gap-2 flex-wrap">
+          <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)}
+            className="border-2 border-black px-2 py-1 font-mono focus:outline-none min-w-0 flex-1 sm:flex-none" />
+          <span className="text-xs font-mono text-gray-400 flex-shrink-0">→</span>
+          <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)}
+            className="border-2 border-black px-2 py-1 font-mono focus:outline-none min-w-0 flex-1 sm:flex-none" />
+        </div>
+        <div className="flex items-center gap-2 sm:ml-auto">
+          {(dateFrom || dateTo) && (
+            <button onClick={() => { setDateFrom(''); setDateTo('') }}
+              className="text-xs font-bold uppercase tracking-wider border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-colors flex-shrink-0">
+              Clear
+            </button>
+          )}
+          <span className="text-xs font-mono text-gray-500 flex-shrink-0">{filtered.length} results</span>
+        </div>
       </div>
 
       {filtered.length === 0 ? (
